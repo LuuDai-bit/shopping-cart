@@ -23,11 +23,22 @@ export default new Vuex.Store({
           resolve()
         })
       })
+    },
+    addProductToCart (context, product) {
+      const cartItem = this.state.products.find(item => { item.id === product.id })
+      if (product.inventory > 0) {
+        if (!cartItem) {
+          context.commit('pushProductToCart', product.id);
+        } else {
+          //add one to quantity of the item
+        }
+      }
     }
   },
   mutations: {
     setProducts (state, products) {
       state.products = products
-    }
+    },
+    
   }
 })
